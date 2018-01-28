@@ -250,6 +250,30 @@ class DropboxClient
 
         return $response['link'];
     }
+    
+    /**
+     * Get a shared url to stream content of a file.
+     *
+     * Download the shared link's file from a user's Dropbox
+     *
+     * @param string $path
+     *
+     * @return string
+     *
+     * @link https://www.dropbox.com/developers/documentation/http/documentation#sharing-get_shared_link_file
+     */
+    public function getSharedLink($path)
+    {
+        $this->setupRequest([
+            'path' => $this->normalizePath($path),
+        ]);
+
+        $this->apiEndpoint = 'files/get_shared_link_file';
+
+        $response = $this->doDropboxApiRequest();
+
+        return $response['url'];
+    }
 
     /**
      * Get a thumbnail for an image.
